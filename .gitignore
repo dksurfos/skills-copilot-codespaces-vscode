@@ -1,0 +1,20 @@
+# Development files
+.vscode/
+.idea/
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Node modules (if using any build tools later)
+node_modules/
+package-lock.json
+
+# Browser cache files
+*.cache

@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestor de Repertorios Musicales</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1><i class="fas fa-music"></i> Gestor de Repertorios Musicales</h1>
+            <nav class="nav-tabs">
+                <button class="tab-btn active" data-tab="repertorio">
+                    <i class="fas fa-list"></i> Repertorio
+                </button>
+                <button class="tab-btn" data-tab="partituras">
+                    <i class="fas fa-file-music"></i> Partituras
+                </button>
+                <button class="tab-btn" data-tab="letras">
+                    <i class="fas fa-pen-fancy"></i> Letras
+                </button>
+            </nav>
+        </header>
+
+        <main class="main-content">
+            <!-- Repertorio Tab -->
+            <div id="repertorio" class="tab-content active">
+                <div class="section-header">
+                    <h2>Gestión de Repertorio</h2>
+                    <button class="btn btn-primary" id="add-song-btn">
+                        <i class="fas fa-plus"></i> Agregar Canción
+                    </button>
+                </div>
+
+                <div class="search-filter">
+                    <input type="text" id="search-input" placeholder="Buscar por título, artista o género...">
+                    <select id="genre-filter">
+                        <option value="">Todos los géneros</option>
+                        <option value="rock">Rock</option>
+                        <option value="pop">Pop</option>
+                        <option value="jazz">Jazz</option>
+                        <option value="classical">Clásica</option>
+                        <option value="folk">Folk</option>
+                        <option value="blues">Blues</option>
+                        <option value="country">Country</option>
+                        <option value="electronic">Electrónica</option>
+                    </select>
+                </div>
+
+                <div class="song-list" id="song-list">
+                    <!-- Songs will be dynamically loaded here -->
+                </div>
+            </div>
+
+            <!-- Partituras Tab -->
+            <div id="partituras" class="tab-content">
+                <div class="section-header">
+                    <h2>Creación de Partituras</h2>
+                    <button class="btn btn-primary" id="new-score-btn">
+                        <i class="fas fa-plus"></i> Nueva Partitura
+                    </button>
+                </div>
+
+                <div class="score-editor">
+                    <div class="score-toolbar">
+                        <select id="time-signature">
+                            <option value="4/4">4/4</option>
+                            <option value="3/4">3/4</option>
+                            <option value="2/4">2/4</option>
+                            <option value="6/8">6/8</option>
+                        </select>
+                        <select id="key-signature">
+                            <option value="C">Do Mayor</option>
+                            <option value="G">Sol Mayor</option>
+                            <option value="D">Re Mayor</option>
+                            <option value="A">La Mayor</option>
+                            <option value="E">Mi Mayor</option>
+                            <option value="F">Fa Mayor</option>
+                            <option value="Bb">Sib Mayor</option>
+                            <option value="Eb">Mib Mayor</option>
+                        </select>
+                        <input type="range" id="tempo" min="60" max="200" value="120">
+                        <span id="tempo-display">120 BPM</span>
+                    </div>
+
+                    <div class="staff-container" id="staff-container">
+                        <div class="staff">
+                            <div class="staff-lines"></div>
+                            <div class="measures" id="measures">
+                                <!-- Musical measures will be added here -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="note-palette">
+                        <h3>Notas</h3>
+                        <div class="note-buttons">
+                            <button class="note-btn" data-note="whole">
+                                <i class="fas fa-circle"></i> Redonda
+                            </button>
+                            <button class="note-btn" data-note="half">
+                                <i class="fas fa-circle-half-stroke"></i> Blanca
+                            </button>
+                            <button class="note-btn" data-note="quarter">
+                                <i class="fas fa-music"></i> Negra
+                            </button>
+                            <button class="note-btn" data-note="eighth">
+                                <i class="fas fa-music"></i> Corchea
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="score-list" id="score-list">
+                    <!-- Saved scores will be listed here -->
+                </div>
+            </div>
+
+            <!-- Letras Tab -->
+            <div id="letras" class="tab-content">
+                <div class="section-header">
+                    <h2>Editor de Letras</h2>
+                    <button class="btn btn-primary" id="new-lyrics-btn">
+                        <i class="fas fa-plus"></i> Nueva Letra
+                    </button>
+                </div>
+
+                <div class="lyrics-editor">
+                    <div class="lyrics-toolbar">
+                        <input type="text" id="lyrics-title" placeholder="Título de la canción">
+                        <input type="text" id="lyrics-artist" placeholder="Artista">
+                        <select id="lyrics-genre">
+                            <option value="">Seleccionar género</option>
+                            <option value="rock">Rock</option>
+                            <option value="pop">Pop</option>
+                            <option value="jazz">Jazz</option>
+                            <option value="classical">Clásica</option>
+                            <option value="folk">Folk</option>
+                            <option value="blues">Blues</option>
+                            <option value="country">Country</option>
+                            <option value="electronic">Electrónica</option>
+                        </select>
+                    </div>
+
+                    <div class="lyrics-content">
+                        <div class="lyrics-structure">
+                            <h3>Estructura</h3>
+                            <div class="structure-buttons">
+                                <button class="structure-btn" data-structure="verse">Verso</button>
+                                <button class="structure-btn" data-structure="chorus">Coro</button>
+                                <button class="structure-btn" data-structure="bridge">Puente</button>
+                                <button class="structure-btn" data-structure="intro">Intro</button>
+                                <button class="structure-btn" data-structure="outro">Outro</button>
+                            </div>
+                        </div>
+
+                        <textarea id="lyrics-textarea" placeholder="Escribe las letras de tu canción aquí...
+
+[Verso 1]
+
+
+[Coro]
+
+
+[Verso 2]
+
+
+[Coro]
+
+"></textarea>
+                    </div>
+
+                    <div class="lyrics-actions">
+                        <button class="btn btn-success" id="save-lyrics-btn">
+                            <i class="fas fa-save"></i> Guardar Letra
+                        </button>
+                        <button class="btn btn-secondary" id="preview-lyrics-btn">
+                            <i class="fas fa-eye"></i> Vista Previa
+                        </button>
+                    </div>
+                </div>
+
+                <div class="lyrics-list" id="lyrics-list">
+                    <!-- Saved lyrics will be listed here -->
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal for adding/editing songs -->
+    <div id="song-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-title">Agregar Canción</h3>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="song-form">
+                    <div class="form-group">
+                        <label for="song-title">Título:</label>
+                        <input type="text" id="song-title" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="song-artist">Artista:</label>
+                        <input type="text" id="song-artist" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="song-genre">Género:</label>
+                        <select id="song-genre" required>
+                            <option value="">Seleccionar género</option>
+                            <option value="rock">Rock</option>
+                            <option value="pop">Pop</option>
+                            <option value="jazz">Jazz</option>
+                            <option value="classical">Clásica</option>
+                            <option value="folk">Folk</option>
+                            <option value="blues">Blues</option>
+                            <option value="country">Country</option>
+                            <option value="electronic">Electrónica</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="song-key">Tonalidad:</label>
+                        <select id="song-key">
+                            <option value="">Seleccionar tonalidad</option>
+                            <option value="C">Do Mayor</option>
+                            <option value="Cm">Do menor</option>
+                            <option value="G">Sol Mayor</option>
+                            <option value="Gm">Sol menor</option>
+                            <option value="D">Re Mayor</option>
+                            <option value="Dm">Re menor</option>
+                            <option value="A">La Mayor</option>
+                            <option value="Am">La menor</option>
+                            <option value="E">Mi Mayor</option>
+                            <option value="Em">Mi menor</option>
+                            <option value="F">Fa Mayor</option>
+                            <option value="Fm">Fa menor</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="song-tempo">Tempo (BPM):</label>
+                        <input type="number" id="song-tempo" min="60" max="200" value="120">
+                    </div>
+                    <div class="form-group">
+                        <label for="song-notes">Notas:</label>
+                        <textarea id="song-notes" placeholder="Agregar notas o comentarios sobre la canción..."></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" id="cancel-btn">Cancelar</button>
+                <button type="submit" class="btn btn-primary" form="song-form">Guardar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Preview Modal for lyrics -->
+    <div id="lyrics-preview-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Vista Previa de Letra</h3>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div id="lyrics-preview-content"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
